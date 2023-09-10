@@ -1,0 +1,95 @@
+SELECT   species_name
+FROM species
+ORDER BY type_id 
+LIMIT 1;
+
+SELECT species_name
+FROM species
+WHERE species_amount > 1800;
+
+SELECT species_name
+FROM species
+WHERE type_id = 5 and species_name like 'п%';
+
+
+SELECT species_amount, species_name
+ FROM species
+ WHERE species_amount = 5 or species_name like '__са'
+ limit 1;
+
+
+
+SELECT DISTINCT species_name
+FROM species
+WHERE to_char (date_start, 'YYYY') = '2023';
+
+SELECT species_name 
+FROM species s
+JOIN species_in_places sip  ON s.species_id = sip.species_id  
+WHERE sip.place_id = 3
+AND s.species_status = 'absent'
+
+
+SELECT  species_name, species_amount , date_start, place_name
+FROM species s 
+JOIN species_type st  ON s.type_id = st.type_id 
+JOIN species_in_places sip  ON s.species_id = sip.species_id
+JOIN places p  ON sip.place_id = p.place_id
+WHERE p.place_name = 'дом' and TO_CHAR (date_start, 'MM') = '05' ; 
+
+SELECT species_name
+FROM species
+WHERE species_name like '% %';
+
+
+
+
+
+
+
+SELECT s1.species_name
+FROM species s1
+join species s2  on s1.date_start = s2.date_start 
+where s2.species_name = 'малыш'
+and s1.species_id  <> s2.species_id
+
+SELECT species_name
+FROM species s    
+JOIN species_in_places sip ON s.species_name = s.species_name 
+JOIN places p  ON p.place_size = p.place_size
+GROUP BY species_name 
+limit 1 OFFSET 5;
+
+SELECT s.species_name
+FROM species s
+JOIN species_in_places sip ON s.species_id = sip.species_id 
+JOIN places p ON sip.place_id = p.place_id
+WHERE p.place_name in ('сарай', 'дом')
+ORDER BY p.place_size  DESC
+LIMIT 1
+
+
+
+SELECT species_name
+FROM species
+WHERE species_amount in
+(SELECT min (species_amount)
+FROM 
+(SELECT species_name, species_amount
+FROM species
+JOIN species_in_places
+USING(species_id)
+JOIN places
+USING(place_id)
+WHERE place_name = 'дом'
+ORDER BY species_amount DESC
+LIMIT 5)t
+);
+
+SELECT species_name
+FROM species s
+WHERE species_status = 'fairy'
+AND NOT EXISTS 
+(SELECT *
+  FROM species_in_places sip
+  WHERE s.species_id = sip.species_id)
