@@ -1,0 +1,106 @@
+  SELECT * 
+from student
+SELECT level AS stud_level, user_id
+FROM student AS s
+WHERE user_id = 9651;
+
+
+SELECT * 
+from teacher
+SELECT email, teacher_id
+from teacher
+WHERE 
+      teacher_id = 30019
+OR teacher_id = 31433;
+
+SELECT * 
+from student
+SELECT level, user_id, education_form, subject_id
+from student
+WHERE ( level = 'Advanced' AND education_form = 'group')
+OR   ( level = 'Upper-Intermediate' AND education_form = 'personal');
+
+
+SELECT * 
+from teacher
+SELECT email, teacher_id, group_id
+from teacher
+WHERE  group_id BETWEEN 180 AND 190;
+
+SELECT * 
+from USERS
+SELECT user_id, user_email, subject_id
+FROM users 
+WHERE user_email LIKE '%yahoo.com';
+
+
+INSERT INTO subject (subject_id, subject_title)
+VALUES(33, 'Chinese');
+SELECT * 
+from subject
+WHERE subject_id = 33;
+
+
+UPDATE teacher
+SET email = 'cold5562@gmail.com'
+WHERE teacher_id = 5562;
+SELECT * 
+from teacher
+WHERE teacher_id = 5562;
+
+
+
+CREATE TABLE posts ( 
+    post_id  INTEGER,
+    text_len  NUMERIC(16,2),
+    post_date  CHAR(10)
+);
+INSERT INTO posts (post_id, text_len, post_date)
+VALUES
+(1, 6799, '09.03.2023'),
+(2,7800, '12.03.2023'),
+(3, 6907, '19.03.2023'),
+(4, 8890, '22.03.2023'),
+(5, 9802, '30.03.2023');
+CREATE TABLE tags ( 
+    post_id  INTEGER,
+    tag  CHAR(8)
+);
+INSERT INTO tags (post_id, tag)
+VALUES
+(1, 'nofilter'),
+(2,'happy'),
+(3, 'joy'),
+(4, 'music'),
+(5, 'dark');
+
+SELECT post_id, text_len, post_date
+FROM posts
+WHERE text_len > 8000;
+
+SELECT post_id, tag
+FROM tags
+WHERE tag = 'happy'
+OR tag = 'joy';
+
+SELECT post_id, post_date
+FROM posts
+WHERE post_date < '10.03.2023';
+
+INSERT INTO posts (post_id, text_len, post_date)
+VALUES(6, 10782, '31.03.2023');
+INSERT INTO tags (post_id, tag)
+VALUES(6, 'love');
+SELECT * 
+from posts
+WHERE post_date = '31.03.2023';
+SELECT * 
+from tags
+WHERE tag = 'love';
+
+UPDATE tags
+SET tag = 'live'
+WHERE post_id = 5;
+SELECT * 
+from tags
+WHERE tag = 'live';
