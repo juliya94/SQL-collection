@@ -1,0 +1,50 @@
+
+ SELECT user_id, user_email
+FROM users
+WHERE user_email = 'houston42@gmail.com';
+SELECT user_id
+FROM student
+WHERE user_id = 44133;
+SELECT subject_id, subject_title
+FROM subject
+WHERE subject_id = 8;
+SELECT email, group_id
+FROM teacherу
+WHERE group_id = 80;
+SELECT
+DISTINCT education_form
+FROM student
+table_name
+WHERE user_id = 12203;
+ 
+
+CREATE TABLE salary ( 
+    teacher_id  INTEGER,
+    salary_amt  NUMERIC(16,2),
+    salary_val  CHAR(3)
+);
+INSERT INTO salary (teacher_id, salary_amt, salary_val)
+VALUES
+(965, 70000, 'RUR'),
+(29091,100000, 'RUR'),
+(29410, 1000, 'EUR'),
+(33576, 1800, 'USD'),
+(33902, 1200, 'EUR');
+CREATE TABLE rooms ( 
+    teacher_id  INTEGER,
+    room_id  NUMERIC(16,2),
+    floor_nam  CHAR(3)
+	);
+INSERT INTO rooms (teacher_id, room_id, floor_nam)
+VALUES
+(965, 1, 1),
+(29091,2, 1),
+(29410, 3, 1),
+(33576, 10, 2),
+(33902, 11, 2);
+select floor_nam, teacher_id
+from rooms
+WHERE floor_nam = '2';
+select teacher_id, salary_val
+from salary
+WHERE salary_val = 'EUR';
